@@ -55,4 +55,15 @@ public class Books
         }
         return false;
     }
+    
+    public void deleteBook(String name){
+        for (String bookName : library.keySet()){
+            if (bookName.equals(name)){ // if book key is found
+                currBook = library.get(bookName); // set current book
+                // show book cover
+                
+        }
+    }
+    
+}
 }

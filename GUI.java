@@ -11,6 +11,12 @@ public class GUI
     // instance variables 
     private Books books; // declares the books instancts that holds the collection
     
+    private int MAX_LIKES = 999999999; // max likes for a book
+    private int MIN_LIKES = 0; /// min likes for a book
+    
+    private boolean validLikes= false;
+
+    
 
     /**
      * Constructor for objects of class GUI
@@ -33,17 +39,29 @@ public class GUI
      **/
      public void addBook(){
          // Ask user for details
-         String name = UI.askString("Title: "); // error check for duplicates here
+         validLikes = false;
+         String name = UI.askString("Title: ");
+         if (books.findBook(name)){ // error check for duplicates
+             UI.println("This book is already in the library!");
+            }
+        else{
          String author = UI.askString("Author: ");
-         
-         // need to add boundary/error checking, constants
+         // checks that user has entered feasable number
+         while (validLikes == false){ 
          int likes = UI.askInt("Likes: ");
-         
-         // add a book image
-         String imgFileName = UIFileChooser.open("Choose image file: ");
-         
-         // add a book to the hashmap
+         if (likes > MIN_LIKES && likes < MAX_LIKES) {
+        // add a book image
+        String imgFileName = UIFileChooser.open("Choose image file: ");
+        // add a book to the hashmap
          books.addBook(name, author, likes, imgFileName);
+         break;
+        }
+         else{
+        // repeats loop until valid like number
+         UI.println("Please enter a valid number");
+        } 
+        }
+    }
      }
      
      /**
@@ -65,9 +83,6 @@ public class GUI
      private void doMouse(String action, double x, double y) {
         if (action.equals("clicked")) {
             // check x and y location of the object
-            if (bookClicked.bookClick(x, y)) {
-                
-            }
                 
             } 
     }

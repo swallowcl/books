@@ -3,7 +3,6 @@ import java.awt.Color;
 import java.util.HashMap; // import hashmap class
 /**
  * Functions to store information about the book
- * 
  * @author Claire
  * @version 8.04.2024
  */
