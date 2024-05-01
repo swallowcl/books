@@ -59,27 +59,15 @@ public class Book
         UI.drawImage(this.image, locX, locY, WIDTH, HEIGHT); // adds cover
         UI.drawString(this.title, locX, locY - 10); // adds title
         UI.drawString(this.author, locX, locY + 10 + HEIGHT);// adds author
-        UI.println("Likes: " + this.likes); // prints the likes
+        UI.println("Likes:"+this.likes); // prints likes
     }
     
-    /**
-     * Checks if book has been clicked
-     */
-    public boolean bookClick(double x, double y){
-        if ((x<= this.locX) && (x <= this.locY) &&
-        (y >= this.WIDTH) && (y >= this.HEIGHT)) {
-            bookClicked = true;
-            
-        }else {
-            bookClicked = false;
-        } return bookClicked;
-    }
     
     /**
-     * Increases number of likes 
+     * Increases likes
      */
-    public void addLike(){
-        this.likes += 1;
+     public void addLike(){
+        this.likes += 1; // add a like 
     }
 }
     

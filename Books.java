@@ -56,14 +56,22 @@ public class Books
         return false;
     }
     
-    public void deleteBook(String name){
-        for (String bookName : library.keySet()){
-            if (bookName.equals(name)){ // if book key is found
-                currBook = library.get(bookName); // set current book
-                // show book cover
-                
+    public boolean deleteBook(String name){
+        for (String deleteName : library.keySet()){
+            if (deleteName.equals(name)){ // if book key is found
+                library.remove(deleteName); // set current book
+                return true;
         }
     }
+    return false;
+    }
     
-}
+     /**
+     * Increases number of likes 
+     */
+
+     public void increaseLike(){
+         currBook.addLike(); // calls function which adds a like
+    }
+
 }

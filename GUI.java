@@ -27,6 +27,7 @@ public class GUI
         books = new Books(); // instantiate the books class 
         UI.initialise();
         UI.addButton("Add", this::addBook);
+        UI.addButton("Remove",this::deleteBook);
         UI.addButton("Find", this::findBook);
         UI.addButton("Quit", UI::quit);
         
@@ -39,27 +40,29 @@ public class GUI
      **/
      public void addBook(){
          // Ask user for details
-         validLikes = false;
          String name = UI.askString("Title: ");
+         UI.clearGraphics();
          if (books.findBook(name)){ // error check for duplicates
              UI.println("This book is already in the library!");
             }
         else{
-         String author = UI.askString("Author: ");
-         // checks that user has entered feasable number
-         while (validLikes == false){ 
-         int likes = UI.askInt("Likes: ");
-         if (likes > MIN_LIKES && likes < MAX_LIKES) {
-        // add a book image
-        String imgFileName = UIFileChooser.open("Choose image file: ");
-        // add a book to the hashmap
-         books.addBook(name, author, likes, imgFileName);
-         break;
-        }
-         else{
-        // repeats loop until valid like number
-         UI.println("Please enter a valid number");
-        } 
+             String author = UI.askString("Author: ");
+             // checks that user has entered feasable number
+             
+             while (validLikes == false){ 
+                 
+             int likes = UI.askInt("Likes: ");
+             if (likes > MIN_LIKES && likes < MAX_LIKES) {
+                // add a book image
+                String imgFileName = UIFileChooser.open("Choose image file: ");
+                // add a book to the hashmap
+                 books.addBook(name, author, likes, imgFileName);
+                 break;
+            }
+             else{
+            // repeats loop until valid like number
+             UI.println("Please enter a valid number");
+            } 
         }
     }
      }
@@ -69,21 +72,43 @@ public class GUI
       */
      public void findBook() {
          // Ask user for title, need to clean up title
-         String bookName = UI.askString("Name of book: ");
+         String bookName = UI.askString("Title: ");
          UI.clearGraphics();
          // look for book in hashmap
          if (books.findBook(bookName)){
              UI.println("Found book!");
          }else {
-             UI.println("Book does not exist!");
+             UI.println("Book is not in library");
          }
-         
      }
      
+        /**
+         * Deletes a book based on name given
+         */
+     public void deleteBook(){
+         // Asks user of name of book to be deleted
+         String deleteName = UI.askString("Name of book: ");
+         UI.clearGraphics();
+         // Look for book in hashmap
+         if (books.deleteBook(deleteName)){
+             UI.println("Book deleted!");
+            }
+         else {
+             UI.println("Book is not in library");
+         }
+     }
+     
+     /**
+      * Mouse function to check if book has been clicked
+      */
      private void doMouse(String action, double x, double y) {
         if (action.equals("clicked")) {
             // check x and y location of the object
-                
-            } 
+            if ((x >= 100) && (x<= 200) && (y >= 100) && (y <=200)){
+                UI.println("Liked!");
+                books.increaseLike();
+            }
+                 
     }
+}
 }
