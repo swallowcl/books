@@ -59,7 +59,7 @@ public class Book
         UI.drawImage(this.image, locX, locY, WIDTH, HEIGHT); // adds cover
         UI.drawString(this.title, locX, locY - 10); // adds title
         UI.drawString(this.author, locX, locY + 10 + HEIGHT);// adds author
-        UI.println("Likes:"+this.likes); // prints likes
+        UI.println("Likes: "+this.likes); // prints likes
     }
     
     

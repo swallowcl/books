@@ -30,6 +30,15 @@ public class Books
         library.put("Dune", new Book("Dune","Frank Herbert", 50));
         
     }
+    
+    /**
+     * Prints all the books
+     */
+    public void printAll(){
+        for (String book : library.keySet()){
+            UI.println(book);
+        }
+    }
 
     /**
      * Add a book to the Hashmap
@@ -45,24 +54,31 @@ public class Books
      */
     public boolean findBook(String name){
         // Search for book in hashmap
-        for (String bookName : library.keySet()){
-            if (bookName.equals(name)){ // if book key is found
+        for (String bookName : library.keySet()) {
+            
+            if (bookName.equalsIgnoreCase(name)) { // if book key is found, ignoring cases
                 currBook = library.get(bookName); // set current book
                 // show book cover
                 currBook.displayBook();
+                
                 return true;
             }
         }
         return false;
     }
     
+    /**
+     * Deletes a book from the library based on name
+     */
     public boolean deleteBook(String name){
         for (String deleteName : library.keySet()){
-            if (deleteName.equals(name)){ // if book key is found
-                library.remove(deleteName); // set current book
+            
+            if (deleteName.equalsIgnoreCase(name)){ // if book key is found, ignoring cases
+                library.remove(deleteName); // remove the book 
+              
                 return true;
+            }
         }
-    }
     return false;
     }
     
